@@ -1,5 +1,5 @@
 ## Stage 1 : build with maven builder image with native capabilities
-FROM quay.io/quarkus/ubi-quarkus-graalvmce-builder-image:22.3-java17 AS build
+FROM quay.io/quarkus/ubi-quarkus-graalvmce-builder-image:22.3-java17@sha256:0b5d8afb31674e0b18a215a6c0fe6087871bf66c252fd18b784901b347e9cba6 AS build
 COPY --chown=quarkus:quarkus mvnw /code/mvnw
 COPY --chown=quarkus:quarkus .mvn /code/.mvn
 COPY --chown=quarkus:quarkus pom.xml /code/
@@ -12,7 +12,7 @@ ARG APP_NAME
 RUN ./mvnw package -Pnative -Dquarkus.application.name=$APP_NAME -Dquarkus.profile=$QUARKUS_PROFILE
 
 ## Stage 2 : create the docker final image
-FROM quay.io/quarkus/quarkus-micro-image:2.0
+FROM quay.io/quarkus/quarkus-micro-image:2.0@sha256:c8abbab7c098b9e0544df4bbef9a87eb9f3c7474cb4c4f3ac8d09fcfe3a1eead
 WORKDIR /work/
 COPY --from=build /code/target/*-runner /work/application
 
