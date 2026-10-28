@@ -113,7 +113,7 @@ jobs:
     steps:
       - name: Build and Push
         id: semver
-        uses: pagopa/github-actions-template/ghcr-build-push@main
+        uses: pagopa/github-actions-template/ghcr-build-push@5e788a4717069100914e66149997ecfd4c48b746 # main
         with:
           file: src/main/docker/Dockerfile.multistage
           github_token: ${{ secrets.GITHUB_TOKEN }}
